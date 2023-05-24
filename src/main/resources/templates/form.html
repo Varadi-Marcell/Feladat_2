@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Numbers Form</title>
+<!--        <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />-->
+<!--        <script th:src="@{/script.js}"></script>-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#form").submit(function (e) {
+                var a = $("#a").val();
+                var b = $("#b").val();
+
+                if (isNaN(a) || isNaN(b)) {
+                    alert("Hiba: nem számokat adtál meg.");
+                } else {
+                    $.post("/arithmetic", {a: a, b: b}, function (data) {
+                        window.location.href = "/result?result=" + data;
+                    });
+                }
+            });
+
+            $("#geometric-button").click(function (e) {
+                var a = $("#a").val();
+                var b = $("#b").val();
+
+                $.post("/geometric", {a: a, b: b}, function (data) {
+                    alert("Mértani átlag: " + data);
+                }).fail(function () {
+                    alert("Hiba: nem számokat adtál meg.");
+                });
+            });
+        });
+
+    </script>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<h2> <span th:text="${error}"></span></h2>
+
+<div class="container">
+    <form id="number-form" action="#" method="post">
+        <input type="text" id="a" name="a" required>
+        <input type="text" id="b" name="b" required>
+        <button type="submit" id="arithmetic-button">Számtani átlag</button>
+        <button type="button" id="geometric-button">Mértani átlag</button>
+    </form>
+</div>
+</body>
+</html>

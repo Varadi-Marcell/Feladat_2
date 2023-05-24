@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Result</title>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />-->
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Számtani átlag: <span th:text="${result}"></span></h2>
+    <a href="/">Vissza a formhoz</a>
+</div>
+</body>
+</html>
